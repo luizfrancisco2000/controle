@@ -13,9 +13,9 @@ return [
         // Database connection settings
         "db" => [
             "host" => "localhost",
-            "dbname" => "flex_ged",
-            "user" => "sa",
-            "pass" => "cthm@flex2019"
+            "dbname" => "cuca",
+            "user" => "root",
+            "pass" => "root"
         ],
     ],
 ];
