@@ -4,17 +4,27 @@
 
     require 'dao.php';
 
-    $app->get();
+    $app->get("\Aluno\{id}", function($request,$response,$args){
+        $retorno = procurar_aluno_by_id($this->db, $args["id"]);
+        return $this->response->withJson($retorno);
+    });
 
-    $app->post();
+    $app->post("\Aluno", function($request,$response,$args){
+        $aluno = $request->getParsedBody();
+        $retorno = cadastrar_aluno($this->db,$aluno);
+        return $this->reponse->withJson($retorno);
+    });
 
-    $app->get();
+    $app->get("\Aluno", function($request,$response,$args){
+        $retorno = procurar_todos($this->db);
+        return $this->reponse->withJson($retorno);
+    });
 
-    $app->get();
+    $app->get("\\nullo");
 
-    $app->get();
+    $app->get("\Aluno\{nome}");
 
-    $app->delete();
+    $app->delete("\Aluno");
 
-    $app->put();
+    $app->put("\Aluno");
 ?>

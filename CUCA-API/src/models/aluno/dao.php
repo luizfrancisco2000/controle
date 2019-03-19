@@ -4,7 +4,7 @@
 
     }
     function procurar_aluno_by_id($db, $id){
-
+        $db->prepare('SELECT * FROM aluno a WHERE a.id=id');
         
     }
     function procurar_aluno_by_nome($db, $nome){
