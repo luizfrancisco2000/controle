@@ -12,7 +12,7 @@
         
     }
 
-    function procurar_todos($db){
+    function procurar_todos_pagamentos($db){
         
     }
 

@@ -45,11 +45,15 @@ function procurar_aluno_by_nome($db, $nome){
     return $alunos;
 }
 
-function procurar_todos($db){
+function procurar_todos_alunos($db){
     $str = $db->prepare('SELECT * FROM aluno');
     $str->execute();
     $alunos = $str->fetchAll();
-    return $alunos;
+    if (count($alunos) > 0) {
+        return $alunos;
+    } else {
+        return array();
+    }
  }
 
 function delete_aluno($db, $aluno){
