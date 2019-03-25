@@ -20,11 +20,21 @@
         return $this->reponse->withJson($retorno);
     });
 
-    $app->get("\\nullo");
+    //$app->get("\\nullo");
 
-    $app->get("\Aluno\{nome}");
+    $app->get("\Aluno\{nome}", function($request,$response,$args){
+        $retorno = procurar_aluno_by_nome($this->db, $args["nome"]);
+        return $this->response->withJson($retorno);
+    });
 
-    $app->delete("\Aluno");
-
-    $app->put("\Aluno");
+    $app->delete("\Aluno", function($request,$response,$args){
+        $aluno = $request->getParsedBody();
+        $retorno = delete_aluno($this->db, $aluno);
+        return $this->response->withJson($retorno);
+    });
+    $app->put("\Aluno\{id}", function($request,$response){
+        $aluno = $request->getParsedBody();
+        $retorno = alterar_aluno($this->db, $aluno);
+        return $this->response->withJson($retorno);
+    });
 ?>

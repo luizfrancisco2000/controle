@@ -20,11 +20,21 @@
         return $this->reponse->withJson($retorno);
     });
 
-    $app->get("\\nullo");
+    //$app->get("\\nullo");
 
-    $app->get("\Contratante\{nome}");
+    $app->get("\Contratante\{nome}", function($request,$response,$args){
+        $retorno = procurar_contratante_by_nome($this->db, $args["nome"]);
+        return $this->response->withJson($retorno);
+    });
 
-    $app->delete("\Contratante");
-
-    $app->put("\Contratante");
+    $app->delete("\Contratante", function($request,$response,$args){
+        $contratante = $request->getParsedBody();
+        $retorno = delete_contratante($this->db, $contratante);
+        return $this->response->withJson($retorno);
+    });
+    $app->put("\Contratante\{id}", function($request,$response,$args){
+        $contratante = $request->getParsedBody();
+        $retorno = alterar_contratante($this->db, $contratante,$args["id"]);
+        return $this->response->withJson($retorno);
+    });
 ?>

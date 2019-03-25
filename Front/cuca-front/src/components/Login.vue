@@ -69,42 +69,5 @@ export default {
       }
     };
   },
-  methods: {
-    cadastrar() {
-      this.$router.push({ name: "CadastrarAdministrador" });
-    },
-    entrar() {
-      axios
-        .post("login", this.login)
-        .then(response => {
-          if (response.data.nome) {
-            this.$router.push({ name: "Menu" });
-            localStorage.setItem(
-                "flex-site_cthm",
-                JSON.stringify(response.data)
-              );
-          } else {
-            this.dialogErro1 = true;
-          }
-        })
-        .catch(e => {
-          console.log(e);
-          this.dialogErro = true;
-        });
-    }
-  },
-
-  created: function() {
-    axios
-      .get("iniciar")
-      .then(response => {
-        if (response.data.usuarios == 0) {
-          this.dialog = true;
-        }
-      })
-      .catch(e => {
-        this.dialogErro = true;
-      });
-  }
-};
+}
 </script>
