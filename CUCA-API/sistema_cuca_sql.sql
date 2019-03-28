@@ -1,49 +1,60 @@
 CREATE DATABASE cuca;
 use cuca;
 
-CREATE TABLE Contratante(
-id INTEGER NOT NULL UNIQUE,
-diaPagamento INTEGER NOT NULL,
-nome INTEGER NOT NULL,
-numeroRG INTEGER NOT NULL UNIQUE,
-emissor INTEGER NOT NULL,
-dataNascimento INTEGER NOT NULL,
-cpf INTEGER NOT NULL UNIQUE,
-email INTEGER NOT NULL,
-logradouro INTEGER NOT NULL,
-cep INTEGER NOT NULL,
-numero INTEGER NOT NULL,
-bairro INTEGER NOT NULL,
-cidade INTEGER NOT NULL,
-grauParentescoAluno CHAR NULL,
-fone INTEGER NOT NULL,
-wpp INTEGER NOT NULL,
-PRIMARY KEY(id)
-);
-
-CREATE TABLE ADMIN(
-nome varchar(255) NOT NULL,
-login varchar(255) NOT NULL,
-senha varchar(255) NOT NULL,
-id INTEGER NOT NULL UNIQUE,
-PRIMARY KEY(id)	
-);
-
 CREATE TABLE Contrato(
-id INTEGER NOT NULL UNIQUE,
+id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 termos VARCHAR(255) NOT NULL,
-horario CHAR NOT NULL NULL,
+valor INTEGER NOT NULL,
+ativo VARCHAR(255) NOT NULL,
+horario CHAR NOT NULL,
+turma VARCHAR(100) NOT NULL,
 sala INTEGER NOT NULL,
 PRIMARY KEY(id)
 );
 
+CREATE TABLE Contratante(
+id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+ativo boolean NOT NULL,
+diaPagamento INTEGER NOT NULL,
+nome VARCHAR(255) NOT NULL,
+numeroRG INTEGER NOT NULL UNIQUE,
+emissor VARCHAR(255) NOT NULL,
+dataNascimento DATE NOT NULL,
+cpf INTEGER NOT NULL UNIQUE,
+email VARCHAR(255) NOT NULL,
+logradouro VARCHAR(255) NOT NULL,
+cep INTEGER NOT NULL,
+numero INTEGER NOT NULL,
+bairro VARCHAR(255) NOT NULL,
+cidade VARCHAR(255) NOT NULL,
+estado char(2) NOT NULL,
+dataAssinatura DATE NOT NULL,
+FKidContrato INTEGER NOT NULL,
+grauParentescoAluno CHAR NULL,
+fone INTEGER NOT NULL,
+wpp INTEGER NOT NULL,
+FOREIGN KEY(FkidContrato) REFERENCES Contrato(id),
+PRIMARY KEY(id)
+);
+
+CREATE TABLE usuario(
+nome varchar(255) NOT NULL,
+user varchar(255) NOT NULL,
+senha varchar(255) NOT NULL,
+id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+PRIMARY KEY(id)	
+);
+
+
 CREATE TABLE Mensalidade(
 id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+pago BOOLEAN NOT NULL,
 mes INTEGER NOT NULL,
-valor INTEGER NOT NULL,
+FKidContratante INTEGER NOT NULL UNIQUE,
 FKidContrato INTEGER NOT NULL UNIQUE,
 PRIMARY KEY(id),
-FOREIGN KEY(FKidContrato) REFERENCES Contrato (id)
+FOREIGN KEY(FKidContrato) REFERENCES Contrato (id),
+FOREIGN KEY(FKidContratante) REFERENCES Contratante (id)
 );
 
 CREATE TABLE Aluno(
@@ -51,7 +62,7 @@ CREATE TABLE Aluno(
 	codigoAluno INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 	cpf INTEGER NOT NULL UNIQUE,
 	rg INTEGER NOT NULL UNIQUE,
-	dataNascimento INTEGER NOT NULL,
+	dataNascimento DATE NOT NULL,
 	nome varchar(255) NOT NULL,
 	fone INTEGER NOT NULL,
 	ativo BOOLEAN NOT NULL,
@@ -61,19 +72,9 @@ CREATE TABLE Aluno(
 	FOREIGN KEY(FKidContratante) REFERENCES Contratante (id)
 );
 
-CREATE TABLE AssinaContrato(
-dataAssinatura INTEGER NOT NULL,
-FKidContrato INTEGER NOT NULL,
-FKidContratante INTEGER NOT NULL,
-FOREIGN KEY(FkidContrato) REFERENCES Contrato(id),
-FOREIGN KEY(FkidContratante) REFERENCES Contratante(id)
-);
 
-CREATE TABLE PagamentoMensalidade(
-dataPago INTEGER NOT NULL,
-FKidMensalidade INTEGER NOT NULL,
-FKidContratante INTEGER NOT NULL,
-FOREIGN KEY(FkidMensalidade) REFERENCES Mensalidade(id),
-FOREIGN KEY(FkidContratante) REFERENCES Contratante(id)
-);
+INSERT usuario(nome, user, senha)VALUES("ADMIN","ADMIN","ADMIN");
 
+UPDATE usuario u SET u.nome="Luiz", u.user="Luiz", u.senha="Luiz" WHERE u.id=1;
+
+select * from usuario;

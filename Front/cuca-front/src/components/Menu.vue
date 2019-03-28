@@ -15,7 +15,7 @@
           <v-flex shrink style="color: black;">
             <img src="../assets/logo.jpg" alt="Perfil" style="height:50%">
             <div class="subheading">{{usuario.nome}}</div>
-            <div class="body-1">{{usuario.email}}</div>
+            <div class="body-1">{{usuario.user}}</div>
           </v-flex>
         </v-layout>
       </v-img>
@@ -40,7 +40,7 @@
         </v-list-tile>
         <v-list-group no-action prepend-icon="insert_drive_file">
           <v-list-tile slot="activator">
-            <v-list-tile-title>Documentos</v-list-tile-title>
+            <v-list-tile-title>Financeiro</v-list-tile-title>
           </v-list-tile>
           <v-list-tile sub-group v-for="item in listaMenuDocumentos" :key="item.nome">
             <v-list-tile-title>
@@ -61,7 +61,7 @@
     <v-toolbar dense app :clipped-left="clipped">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 
-      <v-toolbar-title>Flex Industries</v-toolbar-title>
+      <v-toolbar-title>Cuca - Cursos e Concursos</v-toolbar-title>
 
       <v-spacer></v-spacer>
       <v-menu offset-y>
@@ -77,7 +77,7 @@
       <router-view style="background: white;margin: 18px"/>
     </v-content>
     <v-footer :fixed="fixed" class="footer" app>
-      <span>Copyright {{new Date().getFullYear()}} © Flex Industries. Todos os direitos reservados.</span>
+      <span>Copyright {{new Date().getFullYear()}} © CP. Tech. Todos os direitos reservados.</span>
     </v-footer>
   </v-app>
 </template>
@@ -96,43 +96,43 @@ export default {
       listaMenuDocumentos: [
         {
           icon: "insert_drive_file",
-          title: "Documentos",
-          path: "DocumentosVencidos"
+          title: "Pagamentos",
+          path: ""
         },
         {
           icon: "insert_drive_file",
-          title: "Buscar documentos",
-          path: "BuscaDocumentos"
+          title: "Mensalidades",
+          path: ""
         }
       ],
       listaMenuAdministrador: [
         {
-          title: "Setores",
-          path: "ListarSetores"
+          title: "Contratos",
+          path: ""
         },
         {
-          title: "Tipo de documentos",
-          path: "ListarTipos"
+          title: "Alunos",
+          path: ""
         },
         {
-          title: "Documentos",
-          path: "ListaDocumentos"
+          title: "Contratantes",
+          path: ""
         },
         {
           title: "Usuarios",
-          path: "ListaUsuarios"
+          path: "ListaUsuario"
         }
       ]
     };
   },
   methods: {
     sair: function() {
-      localStorage.setItem("flex-site_cthm", null);
+      localStorage.setItem("cuca-site", null);
       this.$router.push({name: 'Login'})
     }
   },
   created: function(){
-    let usuario = JSON.parse(localStorage.getItem("flex-site_cthm"));
+    let usuario = JSON.parse(localStorage.getItem("cuca-site"));
     this.usuario = usuario
   }
 
