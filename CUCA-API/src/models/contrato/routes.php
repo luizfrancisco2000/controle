@@ -12,12 +12,12 @@
     $app->post("/Contrato", function($request,$response,$args){
         $contrato = $request->getParsedBody();
         $retorno = cadastrar_contrato($this->db,$contrato);
-        return $this->reponse->withJson($retorno);
+        return $this->response->withJson($retorno);
     });
 
     $app->get("/contrato", function($request,$response,$args){
         $retorno = procurar_todos_contratos($this->db);
-        return $this->reponse->withJson($retorno);
+        return $this->response->withJson($retorno);
     });
 
     $app->get("/contratos/{turma}", function($request,$response,$args){

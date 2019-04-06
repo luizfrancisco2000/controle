@@ -15,9 +15,14 @@
         return $this->reponse->withJson($retorno);
     });
 
-    $app->get("/Contratante", function($request,$response,$args){
+    $app->get("/contratantes", function($request,$response,$args){
         $retorno = procurar_todos_contratantes($this->db);
-        return $this->reponse->withJson($retorno);
+        return $this->response->withJson($retorno);
+    });
+
+    $app->get("/contratante", function($request,$response,$args){
+        $retorno = procurar_todos_contratantes($this->db);
+        return $this->response->withJson($retorno);
     });
     
     $app->get("/Contratante/{nome}", function($request,$response,$args){

@@ -22,7 +22,7 @@ function cadastrar_contrato($db, $contrato){
 }
 function procurar_contrato_by_id($db, $id)
 {
-    $str = $db->prepare('SELECT * FROM contrato c WHERE c.id=:id');
+    $str = $db->prepare('SELECT * FROM contrato c WHERE c.id=:id and c.ativo=true');
     $str->bindParam("id", $id);
     $str->execute();
     $contratos = $str->fetchAll();
@@ -55,7 +55,11 @@ function procurar_todos_contratos($db)
     $str = $db->prepare('SELECT * FROM contrato');
     $str->execute();
     $contratos = $str->fetchAll();
-    return $contratos;
+    if (count($contratos) > 0) {
+        return $contratos;
+    } else {
+        return array();
+    }
 }
 
 function delete_contrato($db, $contrato)

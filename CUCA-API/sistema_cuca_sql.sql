@@ -37,6 +37,7 @@ FOREIGN KEY(FkidContrato) REFERENCES Contrato(id),
 PRIMARY KEY(id)
 );
 
+
 CREATE TABLE usuario(
 nome varchar(255) NOT NULL,
 user varchar(255) NOT NULL,
@@ -50,8 +51,8 @@ CREATE TABLE Mensalidade(
 id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 pago BOOLEAN NOT NULL,
 mes INTEGER NOT NULL,
-FKidContratante INTEGER NOT NULL UNIQUE,
-FKidContrato INTEGER NOT NULL UNIQUE,
+FKidContratante INTEGER NOT NULL,
+FKidContrato INTEGER NOT NULL,
 PRIMARY KEY(id),
 FOREIGN KEY(FKidContrato) REFERENCES Contrato (id),
 FOREIGN KEY(FKidContratante) REFERENCES Contratante (id)
@@ -72,9 +73,16 @@ CREATE TABLE Aluno(
 	FOREIGN KEY(FKidContratante) REFERENCES Contratante (id)
 );
 
-
 INSERT usuario(nome, user, senha)VALUES("ADMIN","ADMIN","ADMIN");
 
-UPDATE usuario u SET u.nome="Luiz", u.user="Luiz", u.senha="Luiz" WHERE u.id=1;
+INSERT contrato(termos, valor, ativo, horario, turma, sala) VALUES("BABACA", 250.00, true, "M", "PSC-1", 7);
 
-select * from usuario;
+/*INSERT contratante() VALUES("BABACA", 250.00, true, "M", "PSC-1", 7);
+*/
+
+INSERT contratante(ativo,diaPagamento,nome,numeroRG,emissor,dataNascimento,cpf,email,logradouro,cep,numero,bairro, cidade,estado,dataAssinatura,FkidContrato,grauParentescoAluno,fone,wpp) VALUES(true,6,"Luiz",30573912,"SSP-AM",STR_TO_DATE('26,5,2000','%d,%m,%Y'),21,"luiz","cu",1,1,"comp","manan",'am',NOW(),1,null,123,123);
+
+INSERT mensalidade(pago,mes,FKidContratante,FKidContrato)VALUES(false,4,1,1);
+
+
+select e.nome, c.turma, c.horario, e.ativo, m.pago from contrato c, contratante e, mensalidade m WHERE e.FKidContrato=c.id and m.FKidContrato=c.id and m.mes=date_format(NOW(),"%m");

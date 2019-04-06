@@ -108,7 +108,7 @@ export default {
       listaMenuAdministrador: [
         {
           title: "Contratos",
-          path: ""
+          path: "ListaContrato"
         },
         {
           title: "Alunos",
@@ -116,7 +116,7 @@ export default {
         },
         {
           title: "Contratantes",
-          path: ""
+          path: "ListaContratante"
         },
         {
           title: "Usuarios",
